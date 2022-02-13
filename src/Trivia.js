@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable block-scoped-var */
 /* eslint-disable no-var */
@@ -5,11 +6,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/sort-comp */
 import React, { Component } from "react";
+import axios from "axios";
 import QuestionList from "./components/quiz/QuestionList";
 import Scorebox from "./components/quiz/Scorebox";
 import Results from "./components/quiz/Results";
 import "./Trivia.css";
 import { createQuizData as quizData } from "./api/opentdb";
+
+const SERVER = process.env.REACT_APP_SERVER;
+console.log(SERVER);
 
 class Trivia extends Component {
   constructor(props) {
@@ -26,8 +31,23 @@ class Trivia extends Component {
     this.setState({ current });
   }
 
+  async takeScore(score) {
+    console.log(typeof score);
+    // const config = {
+    //   data: score,
+    //   method: "post",
+    //   baseURL: `${SERVER}`,
+    //   url: `/scores`,
+    // };
+    // console.log(config);
+    // await axios(config);
+    this.setState({ score });
+    await axios.post(`${SERVER}/scores`, score);
+  }
+
   setScore(score) {
     this.setState({ score });
+    this.takeScore(score);
   }
 
   async componentDidMount() {
