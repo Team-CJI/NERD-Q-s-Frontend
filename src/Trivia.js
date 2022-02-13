@@ -32,7 +32,8 @@ class Trivia extends Component {
     this.setState({ current });
   }
 
-  async takeScore(score) {
+  // CRUD: Post Scores //
+  async submitScore(score) {
     const newScore = {
       score: `${score}`,
       email: "cedric@devhub.com",
@@ -48,6 +49,21 @@ class Trivia extends Component {
     // await axios(config);
     // this.setState({ score });
     await axios.post(`${SERVER}/scores`, newScore);
+  }
+
+  // CRUD: Put Scores //
+  updateScore(score) {
+    console.log("something");
+  }
+
+  // CRUD: Delete Scores //
+  deleteScore(score) {
+    console.log("something");
+  }
+
+  // CRUD: Get Scores //
+  getScore(score) {
+    console.log("something");
   }
 
   setScore(score) {
@@ -68,7 +84,7 @@ class Trivia extends Component {
       if (this.state.current >= this.state.questions.length) {
         var scorebox = "";
         var results = <Results {...this.state} />;
-        this.takeScore(this.state.score);
+        this.submitScore(this.state.score);
       } else {
         scorebox = <Scorebox {...this.state} />;
         results = "";
