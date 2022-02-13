@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable block-scoped-var */
@@ -32,6 +33,10 @@ class Trivia extends Component {
   }
 
   async takeScore(score) {
+    const newScore = {
+      score: `${score}`,
+      email: "cedric@devhub.com",
+    };
     console.log(typeof score);
     // const config = {
     //   data: score,
@@ -41,13 +46,12 @@ class Trivia extends Component {
     // };
     // console.log(config);
     // await axios(config);
-    this.setState({ score });
-    await axios.post(`${SERVER}/scores`, score);
+    // this.setState({ score });
+    await axios.post(`${SERVER}/scores`, newScore);
   }
 
   setScore(score) {
     this.setState({ score });
-    this.takeScore(score);
   }
 
   async componentDidMount() {
@@ -64,6 +68,7 @@ class Trivia extends Component {
       if (this.state.current >= this.state.questions.length) {
         var scorebox = "";
         var results = <Results {...this.state} />;
+        this.takeScore(this.state.score);
       } else {
         scorebox = <Scorebox {...this.state} />;
         results = "";
