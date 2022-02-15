@@ -42,7 +42,7 @@ class Results extends Component {
           </center>
           <hr />
           <center>
-            <Button bsStyle="success" href="/">
+            <Button bsstyle="success" href="/">
               Take Again
             </Button>
           </center>

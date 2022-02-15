@@ -10,11 +10,10 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
-// import Trivia from "../../../Trivia";
 
 const player1 = "placeholder";
-
-// const SERVER = process.env.REACT_APP_SERVER;
+const highScores = [];
+const highScoresEmails = [];
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -26,7 +25,9 @@ const player1 = "placeholder";
 
 export default function data() {
   const [score, setScore] = useState(0);
+  const [email, setEmail] = useState(1);
   useEffect(() => {
+    console.log(score, email);
     // CRUD: Get Scores //
     const getScore = async () => {
       // if (this.props.auth0.isAuthenticated) {
@@ -43,13 +44,22 @@ export default function data() {
       //   url: "/scores",
       // };
       // console.log(config);
-      const response = await axios.get("http://localhost:3001/scores");
-      setScore(response.data);
-      console.log(response.data[0].score);
+      await axios
+        .get("http://localhost:3001/scores")
+        .then((response) => {
+          console.log(response.data);
+          response.data.map((scores) => highScores.push(scores.score));
+          response.data.map((emails) => highScoresEmails.push(emails.email));
+          console.log(highScores);
+          console.log(highScores[0]);
+          setScore(highScores);
+          setEmail(highScoresEmails);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       // }
     };
-    const somevariable = getScore();
-    console.log(somevariable);
     console.log(getScore());
     console.log("Your Scores Have Been Received!");
   }, []);
@@ -84,15 +94,15 @@ export default function data() {
 
     rows: [
       {
-        project: <Project image={player1} name="Player 1" />,
+        project: <Project image={player1} name={highScoresEmails[0]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[0].score}
+            {highScores[0]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            working
           </MDTypography>
         ),
         completion: <Progress color="info" value={60} />,
@@ -103,10 +113,10 @@ export default function data() {
         ),
       },
       {
-        project: <Project name="Player 2" />,
+        project: <Project name={highScoresEmails[1]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[1].score}
+            {highScores[1]}
           </MDTypography>
         ),
         status: (
@@ -122,15 +132,15 @@ export default function data() {
         ),
       },
       {
-        project: <Project name="Player 3" />,
+        project: <Project name={highScoresEmails[2]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[2].score}
+            {highScores[2]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            canceled
           </MDTypography>
         ),
         completion: <Progress color="error" value={30} />,
@@ -141,15 +151,15 @@ export default function data() {
         ),
       },
       {
-        project: <Project name="Player 4" />,
+        project: <Project name={highScoresEmails[3]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[3].score}
+            {highScores[3]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            working
           </MDTypography>
         ),
         completion: <Progress color="info" value={80} />,
@@ -160,15 +170,15 @@ export default function data() {
         ),
       },
       {
-        project: <Project name="Player 5" />,
+        project: <Project name={highScoresEmails[4]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[4].score}
+            {highScores[4]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            canceled
           </MDTypography>
         ),
         completion: <Progress color="error" value={0} />,
@@ -179,10 +189,10 @@ export default function data() {
         ),
       },
       {
-        project: <Project name="Player 6" />,
+        project: <Project name={highScoresEmails[5]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score[5].score}
+            {highScores[5]}
           </MDTypography>
         ),
         status: (

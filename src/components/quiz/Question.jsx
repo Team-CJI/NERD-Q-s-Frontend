@@ -47,7 +47,7 @@ class Question extends Component {
         {results.length === 0 ? (
           <div />
         ) : (
-          <Alert bsStyle="small">
+          <Alert bsstyle="small">
             <div className="results">
               <div className="center">
                 {results.map((result, index) => {
@@ -81,7 +81,7 @@ class Question extends Component {
                   key={`choice_${index}`}
                   onClick={this.onChange.bind(this, choice.text)}
                 >
-                  <Button bsStyle="primary" name={question.id} key={`choice_button_${index}`}>
+                  <Button bsstyle="primary" name={question.id} key={`choice_button_${index}`}>
                     {alphabet[index]}
                   </Button>
                   <span className="choice">{choice.text}</span>
