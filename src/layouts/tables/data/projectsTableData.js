@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // @mui material components
 import Icon from "@mui/material/Icon";
@@ -8,9 +10,11 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
+// import Trivia from "../../../Trivia";
 
 const player1 = "placeholder";
-const score = [];
+
+// const SERVER = process.env.REACT_APP_SERVER;
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -21,6 +25,34 @@ const score = [];
 // import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 
 export default function data() {
+  const [score, setScore] = useState(0);
+  useEffect(() => {
+    // CRUD: Get Scores //
+    const getScore = async () => {
+      // if (this.props.auth0.isAuthenticated) {
+      //   const res = await this.props.auth0.getIdTokenClaims();
+      //   const jwt = res.__raw;
+      //   console.log("jwt: ", jwt);
+
+      // let apiUrl = `${SERVER}/scores`;
+      // console.log(apiUrl);
+      // const config = {
+      //   // headers: { "Authorization": `Bearer ${jwt}` },
+      //   method: "get",
+      //   baseURL: "http://localhost:3001",
+      //   url: "/scores",
+      // };
+      // console.log(config);
+      const response = await axios.get("http://localhost:3001/scores");
+      setScore(response.data);
+      console.log(response.data[0].score);
+      // }
+    };
+    const somevariable = getScore();
+    console.log(somevariable);
+    console.log(getScore());
+    console.log("Your Scores Have Been Received!");
+  }, []);
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -55,12 +87,12 @@ export default function data() {
         project: <Project image={player1} name="Player 1" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[0].score}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
+            done
           </MDTypography>
         ),
         completion: <Progress color="info" value={60} />,
@@ -74,7 +106,7 @@ export default function data() {
         project: <Project name="Player 2" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[1].score}
           </MDTypography>
         ),
         status: (
@@ -93,12 +125,12 @@ export default function data() {
         project: <Project name="Player 3" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[2].score}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
+            done
           </MDTypography>
         ),
         completion: <Progress color="error" value={30} />,
@@ -112,12 +144,12 @@ export default function data() {
         project: <Project name="Player 4" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[3].score}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
+            done
           </MDTypography>
         ),
         completion: <Progress color="info" value={80} />,
@@ -131,12 +163,12 @@ export default function data() {
         project: <Project name="Player 5" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[4].score}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
+            done
           </MDTypography>
         ),
         completion: <Progress color="error" value={0} />,
@@ -150,7 +182,7 @@ export default function data() {
         project: <Project name="Player 6" />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {score[5].score}
           </MDTypography>
         ),
         status: (

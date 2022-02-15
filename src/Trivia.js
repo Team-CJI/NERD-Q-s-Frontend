@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
@@ -52,18 +55,47 @@ class Trivia extends Component {
   }
 
   // CRUD: Put Scores //
-  updateScore(score) {
-    console.log("something");
+  async updateScore(updateScoreId) {
+    console.log("scores", updateScoreId);
+    const id = updateScoreId._id;
+    let updateScores = this.state.scores;
+    console.log(updateScores);
+    updateScores = this.state.scores.map((currentScore) =>
+      currentScore._id === updateScoreId._id ? updateScores : currentScore
+    );
+    this.setState({ score: updateScores });
+    console.log(id);
+    const config = {
+      params: { email: this.props.user.email },
+      data: {
+        score: updateScoreId.score,
+      },
+      method: "put",
+      baseURL: `${SERVER}`,
+      url: `/scores/${id}`,
+    };
+    const response = await axios(config);
+    console.log(response);
+    this.getScores();
   }
 
   // CRUD: Delete Scores //
-  deleteScore(score) {
-    console.log("something");
-  }
-
-  // CRUD: Get Scores //
-  getScore(score) {
-    console.log("something");
+  async deleteScore(scoreId) {
+    console.log("score", scoreId);
+    const id = scoreId._id;
+    let newScores = this.state.scores;
+    console.log(newScores);
+    newScores = this.state.scores.filter((score) => score._id !== id);
+    this.setState({ score: newScores });
+    console.log(id);
+    const config = {
+      params: { email: this.props.user.email },
+      method: "delete",
+      baseURL: `${SERVER}`,
+      url: `/scores/${id}`,
+    };
+    await axios(config);
+    console.log(config);
   }
 
   setScore(score) {
