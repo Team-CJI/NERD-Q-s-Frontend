@@ -8,7 +8,7 @@ function LoginButton() {
   return (
     !isAuthenticated && (
       <MDButton onClick={loginWithRedirect} variant="gradient" color="info" fullWidth>
-        sign in
+        Login
       </MDButton>
     )
   );

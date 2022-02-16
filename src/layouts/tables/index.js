@@ -15,6 +15,7 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import React from "react";
+import FormUpdateModal from "./data/form/UpdateModal";
 
 // class Tables extends Component {
 //   constructor(props) {
@@ -57,7 +58,11 @@ function Tables() {
                   showTotalEntries={false}
                   noEndBorder
                 />
+                <FormUpdateModal />
               </MDBox>
+              <Card>
+                <FormUpdateModal />
+              </Card>
             </Card>
           </Grid>
         </Grid>

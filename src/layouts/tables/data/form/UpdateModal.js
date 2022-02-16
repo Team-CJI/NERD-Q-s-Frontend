@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import { Component } from "react";
@@ -20,20 +21,12 @@ export default class FormUpdateModal extends Component {
     this.props.onHide();
   };
 
-  handleTitleChange = (event) => {
+  handleEmail = (event) => {
     this.setState({ title: event.target.value });
   };
 
-  handleDescriptionChange = (event) => {
+  handleScoreChange = (event) => {
     this.setState({ description: event.target.value });
-  };
-
-  handleStatusChange = (event) => {
-    this.setState({ status: event.target.value });
-  };
-
-  handleImageChange = (event) => {
-    this.setState({ image: event.target.value });
   };
 
   render() {
@@ -43,40 +36,22 @@ export default class FormUpdateModal extends Component {
         <Modal.Header closeButton>
           <Modal.Body>
             <Form onSubmit={this.handleSubmit}>
-              <Form.Group className="mb-3" controlId="bookTitle">
-                <Form.Label>Book Title</Form.Label>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>User email</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter Book Title"
-                  onChange={this.handleTitleChange}
+                  placeholder="Enter User Email"
+                  onChange={this.handleEmail}
                   value={this.state.title}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="bookDescription">
-                <Form.Label>Book Description</Form.Label>
+              <Form.Group className="mb-3" controlId="scoreUpdater">
+                <Form.Label>Score Updater</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter Book Description"
-                  onChange={this.handleDescriptionChange}
+                  placeholder="Enter Score to Update to"
+                  onChange={this.handleScoreChange}
                   value={this.state.description}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="bookStatus">
-                <Form.Label>Book Status</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Enter Book Status"
-                  onChange={this.handleStatusChange}
-                  value={this.state.status}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="bookImage">
-                <Form.Label>Book Image Link</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Paste link to an image of your book"
-                  onChange={this.handleImageChange}
-                  value={this.state.image}
                 />
               </Form.Group>
               <Button variant="primary" type="submit">

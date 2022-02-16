@@ -51,8 +51,6 @@ function Basic() {
           </MDTypography>
           <MDBox mt={4} mb={1}>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-            <LoginButton />
-            <LogoutButton />
           </MDBox>
         </MDBox>
       </Card>
