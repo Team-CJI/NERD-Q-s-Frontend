@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -14,6 +15,7 @@ import MDProgress from "components/MDProgress";
 const player1 = "placeholder";
 const highScores = [];
 const highScoresEmails = [];
+const highScoresId = [];
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -26,8 +28,9 @@ const highScoresEmails = [];
 export default function data() {
   const [score, setScore] = useState(0);
   const [email, setEmail] = useState(1);
+  const [id, setId] = useState(2);
   useEffect(() => {
-    console.log(score, email);
+    console.log(score, email, id);
     // CRUD: Get Scores //
     const getScore = async () => {
       // if (this.props.auth0.isAuthenticated) {
@@ -50,10 +53,13 @@ export default function data() {
           console.log(response.data);
           response.data.map((scores) => highScores.push(scores.score));
           response.data.map((emails) => highScoresEmails.push(emails.email));
+          response.data.map((ids) => highScoresId.push(ids._id));
           console.log(highScores);
           console.log(highScores[0]);
           setScore(highScores);
           setEmail(highScoresEmails);
+          setId(highScoresId);
+          console.log(highScoresId);
         })
         .catch((error) => {
           console.log(error);
@@ -83,18 +89,41 @@ export default function data() {
     </MDBox>
   );
 
+  const clear = async () => {
+    await axios
+      .get("http://localhost:3001/scores/clear")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const update = async () => {
+    await axios
+      .get("http://localhost:3001/scores/update")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return {
     columns: [
-      { Header: "project", accessor: "project", width: "30%", align: "left" },
+      { Header: "Player", accessor: "Player", width: "30%", align: "left" },
       { Header: "HighScore", accessor: "HighScore", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "completion", accessor: "completion", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "Clear Scores", accessor: "action", align: "center" },
+      { Header: "Update Scores", accessor: "Update", align: "center" },
     ],
 
     rows: [
       {
-        project: <Project image={player1} name={highScoresEmails[0]} />,
+        Player: <Project image={player1} name={highScoresEmails[0]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[0]}
@@ -102,18 +131,23 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
+            Complete
           </MDTypography>
         ),
-        completion: <Progress color="info" value={60} />,
+        completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name={highScoresEmails[1]} />,
+        Player: <Project name={highScoresEmails[1]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[1]}
@@ -121,18 +155,23 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            Complete
           </MDTypography>
         ),
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name={highScoresEmails[2]} />,
+        Player: <Project name={highScoresEmails[2]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[2]}
@@ -140,18 +179,23 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
+            Complete
           </MDTypography>
         ),
-        completion: <Progress color="error" value={30} />,
+        completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name={highScoresEmails[3]} />,
+        Player: <Project name={highScoresEmails[3]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[3]}
@@ -159,18 +203,23 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
+            Complete
           </MDTypography>
         ),
-        completion: <Progress color="info" value={80} />,
+        completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name={highScoresEmails[4]} />,
+        Player: <Project name={highScoresEmails[4]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[4]}
@@ -178,18 +227,23 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
+            Complete
           </MDTypography>
         ),
-        completion: <Progress color="error" value={0} />,
+        completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name={highScoresEmails[5]} />,
+        Player: <Project name={highScoresEmails[5]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
             {highScores[5]}
@@ -197,13 +251,18 @@ export default function data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            Complete
           </MDTypography>
         ),
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
