@@ -23,6 +23,7 @@ import MDPagination from "components/MDPagination";
 // NERDQ React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import FormUpdateModal from "../../../layouts/tables/data/form/UpdateModal";
 
 function DataTable({
   entriesPerPage,
@@ -248,6 +249,7 @@ function DataTable({
           </MDPagination>
         )}
       </MDBox>
+      <FormUpdateModal />
     </TableContainer>
   );
 }

@@ -3,7 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import MDButton from "components/MDButton";
 
 function LoginButton() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+  console.log(user);
 
   return (
     !isAuthenticated && (

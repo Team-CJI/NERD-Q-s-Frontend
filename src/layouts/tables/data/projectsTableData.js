@@ -11,11 +11,14 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
+import UpdateModal from "./form/UpdateModal";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 const player1 = "placeholder";
 const highScores = [];
 const highScoresEmails = [];
 const highScoresId = [];
+// const { user } = useAuth0();
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -29,6 +32,7 @@ export default function data() {
   const [score, setScore] = useState(0);
   const [email, setEmail] = useState(1);
   const [id, setId] = useState(2);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   useEffect(() => {
     console.log(score, email, id);
     // CRUD: Get Scores //
@@ -60,6 +64,7 @@ export default function data() {
           setEmail(highScoresEmails);
           setId(highScoresId);
           console.log(highScoresId);
+          // console.log(user);
         })
         .catch((error) => {
           console.log(error);
@@ -100,16 +105,16 @@ export default function data() {
       });
   };
 
-  const update = async () => {
-    await axios
-      .get("http://localhost:3001/scores/update")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const update = async () => {
+  //   await axios
+  //     .get("http://localhost:3001/scores/update")
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return {
     columns: [
@@ -142,7 +147,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -166,7 +172,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -190,7 +197,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -214,7 +222,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -238,7 +247,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -262,7 +272,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
