@@ -4,6 +4,7 @@ import axios from "axios";
 
 const getQuestionsFromAPI = async () => {
   try {
+    // connect button to this method to change axios.get//
     const response = await axios.get("https://opentdb.com/api.php?amount=10");
     return response.data.results;
   } catch (err) {

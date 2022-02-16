@@ -14,6 +14,16 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import projectsTableData from "layouts/tables/data/projectsTableData";
+import React from "react";
+
+// class Tables extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       score: 0,
+//     };
+//   }
+// }
 
 function Tables() {
   const { columns: pColumns, rows: pRows } = projectsTableData();

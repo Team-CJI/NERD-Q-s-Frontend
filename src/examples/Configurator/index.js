@@ -140,11 +140,11 @@ function Configurator() {
         <Divider />
         <MDBox display="flex" justifyContent="center">
           <GitHubButton
-            href="https://github.com/Team-CJIofficial/material-dashboard-react"
+            href="https://github.com/Team-CJI"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
-            aria-label="Star Team-CJIofficial/material-dashboard-react on GitHub"
+            aria-label="Star Team-CJI on GitHub"
           >
             Star
           </GitHubButton>

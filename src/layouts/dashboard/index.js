@@ -18,6 +18,8 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 // import Projects from "layouts/dashboard/components/Projects";
 import TraviaOverview from "layouts/dashboard/components/TraviaOverview";
+// import Projects from "./components/Projects";
+import Ratings from "./components/Testing";
 
 function Dashboard() {
   const { scores } = reportsLineChartData;
@@ -60,6 +62,7 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
               {/* <Projects /> */}
+              <Ratings />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <TraviaOverview />

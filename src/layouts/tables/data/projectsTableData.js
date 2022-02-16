@@ -1,4 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // @mui material components
 import Icon from "@mui/material/Icon";
@@ -10,7 +13,9 @@ import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
 
 const player1 = "placeholder";
-const score = [];
+const highScores = [];
+const highScoresEmails = [];
+const highScoresId = [];
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -21,6 +26,49 @@ const score = [];
 // import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 
 export default function data() {
+  const [score, setScore] = useState(0);
+  const [email, setEmail] = useState(1);
+  const [id, setId] = useState(2);
+  useEffect(() => {
+    console.log(score, email, id);
+    // CRUD: Get Scores //
+    const getScore = async () => {
+      // if (this.props.auth0.isAuthenticated) {
+      //   const res = await this.props.auth0.getIdTokenClaims();
+      //   const jwt = res.__raw;
+      //   console.log("jwt: ", jwt);
+
+      // let apiUrl = `${SERVER}/scores`;
+      // console.log(apiUrl);
+      // const config = {
+      //   // headers: { "Authorization": `Bearer ${jwt}` },
+      //   method: "get",
+      //   baseURL: "http://localhost:3001",
+      //   url: "/scores",
+      // };
+      // console.log(config);
+      await axios
+        .get("http://localhost:3001/scores")
+        .then((response) => {
+          console.log(response.data);
+          response.data.map((scores) => highScores.push(scores.score));
+          response.data.map((emails) => highScoresEmails.push(emails.email));
+          response.data.map((ids) => highScoresId.push(ids._id));
+          console.log(highScores);
+          console.log(highScores[0]);
+          setScore(highScores);
+          setEmail(highScoresEmails);
+          setId(highScoresId);
+          console.log(highScoresId);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // }
+    };
+    console.log(getScore());
+    console.log("Your Scores Have Been Received!");
+  }, []);
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -41,127 +89,180 @@ export default function data() {
     </MDBox>
   );
 
+  const clear = async () => {
+    await axios
+      .get("http://localhost:3001/scores/clear")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const update = async () => {
+    await axios
+      .get("http://localhost:3001/scores/update")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return {
     columns: [
-      { Header: "project", accessor: "project", width: "30%", align: "left" },
+      { Header: "Player", accessor: "Player", width: "30%", align: "left" },
       { Header: "HighScore", accessor: "HighScore", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "completion", accessor: "completion", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "Clear Scores", accessor: "action", align: "center" },
+      { Header: "Update Scores", accessor: "Update", align: "center" },
     ],
 
     rows: [
       {
-        project: <Project image={player1} name="Player 1" />,
+        Player: <Project image={player1} name={highScoresEmails[0]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {highScores[0]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
-        ),
-        completion: <Progress color="info" value={60} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project name="Player 2" />,
-        HighScore: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            Complete
           </MDTypography>
         ),
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
           </MDTypography>
         ),
-      },
-      {
-        project: <Project name="Player 3" />,
-        HighScore: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
-          </MDTypography>
-        ),
-        completion: <Progress color="error" value={30} />,
-        action: (
+        Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
       {
-        project: <Project name="Player 4" />,
+        Player: <Project name={highScoresEmails[1]} />,
         HighScore: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
+            {highScores[1]}
           </MDTypography>
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
-        ),
-        completion: <Progress color="info" value={80} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project name="Player 5" />,
-        HighScore: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
-          </MDTypography>
-        ),
-        completion: <Progress color="error" value={0} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project name="Player 6" />,
-        HighScore: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            {score}
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
+            Complete
           </MDTypography>
         ),
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        Player: <Project name={highScoresEmails[2]} />,
+        HighScore: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            {highScores[2]}
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Complete
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        Player: <Project name={highScoresEmails[3]} />,
+        HighScore: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            {highScores[3]}
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Complete
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        Player: <Project name={highScoresEmails[4]} />,
+        HighScore: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            {highScores[4]}
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Complete
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
+          </MDTypography>
+        ),
+      },
+      {
+        Player: <Project name={highScoresEmails[5]} />,
+        HighScore: (
+          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+            {highScores[5]}
+          </MDTypography>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Complete
+          </MDTypography>
+        ),
+        completion: <Progress color="success" value={100} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={clear}>more_vert</Icon>
+          </MDTypography>
+        ),
+        Update: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon onClick={update}>more_vert</Icon>
           </MDTypography>
         ),
       },
