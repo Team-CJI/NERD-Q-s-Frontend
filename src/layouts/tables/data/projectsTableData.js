@@ -34,6 +34,7 @@ export default function data() {
   const [id, setId] = useState(2);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line
     console.log(score, email, id);
     // CRUD: Get Scores //
     const getScore = async () => {
@@ -54,24 +55,31 @@ export default function data() {
       await axios
         .get("http://localhost:3001/scores")
         .then((response) => {
+          // eslint-disable-next-line
           console.log(response.data);
           response.data.map((scores) => highScores.push(scores.score));
           response.data.map((emails) => highScoresEmails.push(emails.email));
           response.data.map((ids) => highScoresId.push(ids._id));
+          // eslint-disable-next-line
           console.log(highScores);
+          // eslint-disable-next-line
           console.log(highScores[0]);
           setScore(highScores);
           setEmail(highScoresEmails);
           setId(highScoresId);
+          // eslint-disable-next-line
           console.log(highScoresId);
           // console.log(user);
         })
         .catch((error) => {
+          // eslint-disable-next-line
           console.log(error);
         });
       // }
     };
+    // eslint-disable-next-line
     console.log(getScore());
+    // eslint-disable-next-line
     console.log("Your Scores Have Been Received!");
   }, []);
   const Project = ({ image, name }) => (
@@ -98,9 +106,11 @@ export default function data() {
     await axios
       .get("http://localhost:3001/scores/clear")
       .then((response) => {
+        // eslint-disable-next-line
         console.log(response);
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.log(error);
       });
   };

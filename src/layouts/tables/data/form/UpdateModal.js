@@ -29,11 +29,13 @@ class FormUpdateModal extends Component {
     const { value } = event.target.value;
     const { formData } = this.state;
     formData[field] = value;
+    // eslint-disable-next-line
     console.log(this.props.auth0.user);
     this.setState({ formData });
   };
 
   async updateScore(updateScoreId) {
+    // eslint-disable-next-line
     console.log("scores", updateScoreId);
     const id = updateScoreId._id;
     let updateScores = [];
@@ -41,6 +43,7 @@ class FormUpdateModal extends Component {
       currentScore._id === updateScoreId._id ? updateScores : currentScore
     );
     this.setState({ score: updateScores });
+    // eslint-disable-next-line
     console.log(id);
     const config = {
       data: {
@@ -51,11 +54,13 @@ class FormUpdateModal extends Component {
       url: `/scores/${id}`,
     };
     const response = await axios(config);
+    // eslint-disable-next-line
     console.log(response);
     this.getScores();
   }
 
   render() {
+    // eslint-disable-next-line
     console.log(this.props);
     return (
       <Modal show={this.props.showUpdateModal} onHide={!this.props.showUpdateModal}>

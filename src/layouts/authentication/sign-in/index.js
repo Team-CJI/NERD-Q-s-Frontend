@@ -31,6 +31,7 @@ import LogoutButton from "../../../LogoutButton";
 function Basic() {
   // const [rememberMe, setRememberMe] = useState(false);
   const { isAuthenticated } = useAuth0();
+  // eslint-disable-next-line
   console.log(useAuth0);
   // const handleSetRememberMe = () => setRememberMe(!rememberMe);
 

@@ -4,6 +4,7 @@ import MDButton from "components/MDButton";
 
 function LoginButton() {
   const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+  // eslint-disable-next-line
   console.log(user);
 
   return (

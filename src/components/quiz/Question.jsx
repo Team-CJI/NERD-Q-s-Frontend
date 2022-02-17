@@ -25,6 +25,7 @@ class Question extends Component {
       results.push("X");
       setCurrent(this.props.current + 1);
     } else {
+      // eslint-disable-next-line
       console.log("not right or wrong");
       setCurrent(this.props.current + 1);
     }
