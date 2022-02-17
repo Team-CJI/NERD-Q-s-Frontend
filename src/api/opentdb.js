@@ -8,6 +8,7 @@ const getQuestionsFromAPI = async () => {
     const response = await axios.get("https://opentdb.com/api.php?amount=10");
     return response.data.results;
   } catch (err) {
+    // eslint-disable-next-line
     console.log(err);
   }
 };
@@ -42,6 +43,7 @@ const createQuizData = async () => {
     const formattedQuestions = await formatAPIQuizData(questions);
     return formattedQuestions;
   } catch (err) {
+    // eslint-disable-next-line
     console.log(err);
   }
 };

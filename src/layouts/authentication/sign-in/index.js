@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 // import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 // react-router-dom components
@@ -30,6 +31,8 @@ import LogoutButton from "../../../LogoutButton";
 function Basic() {
   // const [rememberMe, setRememberMe] = useState(false);
   const { isAuthenticated } = useAuth0();
+  // eslint-disable-next-line
+  console.log(useAuth0);
   // const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   return (
@@ -47,11 +50,10 @@ function Basic() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
+            Login
           </MDTypography>
           <MDBox mt={4} mb={1}>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-            <LoginButton />
             <LogoutButton />
           </MDBox>
         </MDBox>

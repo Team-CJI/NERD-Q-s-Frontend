@@ -2,7 +2,6 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
-import SignOut from "layouts/authentication/sign-out";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -47,7 +46,7 @@ const routes = [
     key: "sign-out",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
-    component: <SignOut />,
+    component: <SignIn />,
     // component: isAuthenticated ? <LogoutButton /> : <LoginButton />,
   },
 ];

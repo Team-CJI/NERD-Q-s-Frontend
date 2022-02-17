@@ -11,11 +11,14 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
+import UpdateModal from "./form/UpdateModal";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 const player1 = "placeholder";
 const highScores = [];
 const highScoresEmails = [];
 const highScoresId = [];
+// const { user } = useAuth0();
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -29,7 +32,9 @@ export default function data() {
   const [score, setScore] = useState(0);
   const [email, setEmail] = useState(1);
   const [id, setId] = useState(2);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line
     console.log(score, email, id);
     // CRUD: Get Scores //
     const getScore = async () => {
@@ -50,23 +55,31 @@ export default function data() {
       await axios
         .get("http://localhost:3001/scores")
         .then((response) => {
+          // eslint-disable-next-line
           console.log(response.data);
           response.data.map((scores) => highScores.push(scores.score));
           response.data.map((emails) => highScoresEmails.push(emails.email));
           response.data.map((ids) => highScoresId.push(ids._id));
+          // eslint-disable-next-line
           console.log(highScores);
+          // eslint-disable-next-line
           console.log(highScores[0]);
           setScore(highScores);
           setEmail(highScoresEmails);
           setId(highScoresId);
+          // eslint-disable-next-line
           console.log(highScoresId);
+          // console.log(user);
         })
         .catch((error) => {
+          // eslint-disable-next-line
           console.log(error);
         });
       // }
     };
+    // eslint-disable-next-line
     console.log(getScore());
+    // eslint-disable-next-line
     console.log("Your Scores Have Been Received!");
   }, []);
   const Project = ({ image, name }) => (
@@ -93,23 +106,25 @@ export default function data() {
     await axios
       .get("http://localhost:3001/scores/clear")
       .then((response) => {
+        // eslint-disable-next-line
         console.log(response);
       })
       .catch((error) => {
+        // eslint-disable-next-line
         console.log(error);
       });
   };
 
-  const update = async () => {
-    await axios
-      .get("http://localhost:3001/scores/update")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const update = async () => {
+  //   await axios
+  //     .get("http://localhost:3001/scores/update")
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return {
     columns: [
@@ -142,7 +157,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -166,7 +182,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -190,7 +207,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -214,7 +232,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -238,7 +257,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },
@@ -262,7 +282,8 @@ export default function data() {
         ),
         Update: (
           <MDTypography component="a" href="#" color="text">
-            <Icon onClick={update}>more_vert</Icon>
+            <Icon onClick={() => setShowUpdateModal(true)}>more_vert</Icon>
+            <UpdateModal showUpdateModal={showUpdateModal} />
           </MDTypography>
         ),
       },

@@ -18,7 +18,6 @@ import "./Trivia.css";
 import { createQuizData as quizData } from "./api/opentdb";
 
 const SERVER = process.env.REACT_APP_SERVER;
-console.log(SERVER);
 
 class Trivia extends Component {
   constructor(props) {
@@ -41,7 +40,7 @@ class Trivia extends Component {
       score: `${score}`,
       email: "cedric@devhub.com",
     };
-    console.log(typeof score);
+    // console.log(typeof score);
     // const config = {
     //   data: score,
     //   method: "post",
@@ -56,14 +55,15 @@ class Trivia extends Component {
 
   // CRUD: Put Scores //
   async updateScore(updateScoreId) {
-    console.log("scores", updateScoreId);
+    // console.log("scores", updateScoreId);
     const id = updateScoreId._id;
     let updateScores = this.state.scores;
-    console.log(updateScores);
+    // console.log(updateScores);
     updateScores = this.state.scores.map((currentScore) =>
       currentScore._id === updateScoreId._id ? updateScores : currentScore
     );
     this.setState({ score: updateScores });
+    // eslint-disable-next-line
     console.log(id);
     const config = {
       params: { email: this.props.user.email },
@@ -75,6 +75,7 @@ class Trivia extends Component {
       url: `/scores/${id}`,
     };
     const response = await axios(config);
+    // eslint-disable-next-line
     console.log(response);
     this.getScores();
   }
@@ -107,6 +108,7 @@ class Trivia extends Component {
       this.setState({ loading: true });
       this.setState({ questions: await quizData(), loading: false });
     } catch (err) {
+      // eslint-disable-next-line
       console.log(err);
     }
   }
