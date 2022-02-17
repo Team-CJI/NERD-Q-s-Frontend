@@ -48,12 +48,12 @@ export default function data() {
       // const config = {
       //   // headers: { "Authorization": `Bearer ${jwt}` },
       //   method: "get",
-      //   baseURL: "http://localhost:3001",
+      //   baseURL: "https://nerd-q-s-backend.herokuapp.com",
       //   url: "/scores",
       // };
       // console.log(config);
       await axios
-        .get("http://localhost:3001/scores")
+        .get("https://nerd-q-s-backend.herokuapp.com/scores")
         .then((response) => {
           // eslint-disable-next-line
           console.log(response.data);
@@ -104,7 +104,7 @@ export default function data() {
 
   const clear = async () => {
     await axios
-      .get("http://localhost:3001/scores/clear")
+      .get("https://nerd-q-s-backend.herokuapp.com/scores/clear")
       .then((response) => {
         // eslint-disable-next-line
         console.log(response);
@@ -117,7 +117,7 @@ export default function data() {
 
   // const update = async () => {
   //   await axios
-  //     .get("http://localhost:3001/scores/update")
+  //     .get("https://nerd-q-s-backend.herokuapp.com/scores/update")
   //     .then((response) => {
   //       console.log(response);
   //     })

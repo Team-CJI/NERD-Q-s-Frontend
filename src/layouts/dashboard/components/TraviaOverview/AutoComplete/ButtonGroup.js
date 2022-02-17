@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 
 const handleVideoGamesAPI = async () => {
-  const response = await axios.get(`http://localhost:3001`);
+  const response = await axios.get(`https://nerd-q-s-backend.herokuapp.com`);
   const triviaVideoGames = response.data;
   this.setState({ triviaVideoGames });
 };
